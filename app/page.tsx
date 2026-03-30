@@ -1,11 +1,13 @@
-import React from 'react'
-import Navbar from './components/Navbar/page'
-const page = () => {
+
+
+import Navbar from './components/Navbar/page.jsx'
+// import Mid from './components/Mid/page.jsx'
+const Page = () => {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
+      {/* <Mid /> */}
     </div>
   )
 }
-
-export default page
+export default Page
