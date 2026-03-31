@@ -1,84 +1,99 @@
-import React from 'react'
-import { PiAirplaneTakeoffLight } from "react-icons/pi";
-import { GoPeople } from "react-icons/go";
+import React from 'react';
+import { PiAirplaneTakeoffLight, PiBuildingsLight } from "react-icons/pi";
+import { GoPeople, GoChecklist } from "react-icons/go";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { IoIosTrendingUp } from "react-icons/io";
 
+const StatCard = ({ icon, label, value, trend, iconBg, iconColor }) => (
+  <div className='bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow h-40 w-full flex justify-between px-6 items-center'>
+    <div>
+      <div className={`${iconBg} ${iconColor} p-3 rounded-full inline-block`}>
+        {React.cloneElement(icon, { size: 28 })}
+      </div>
+      <p className='mt-3 text-sm font-medium text-gray-500'>{label}</p>
+      <p className='text-3xl font-bold text-gray-800'>{value}</p>
+    </div>
+    <div className='bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full self-start mt-6'>
+      {trend}
+    </div>
+  </div>
+);
 
 const Navbar = () => {
+  const stats = [
+    {
+      icon: <GoPeople />,
+      label: "Passengers Today",
+      value: "23,456",
+      trend: "+8%",
+      iconBg: "bg-blue-100",
+      iconColor: "text-blue-600",
+    },
+    {
+      icon: <GoChecklist />,
+      label: "On-Time Rate",
+      value: "94%",
+      trend: "+2%",
+      iconBg: "bg-green-100",
+      iconColor: "text-green-600",
+    },
+    {
+      icon: <PiBuildingsLight />,
+      label: "Airlines",
+      value: "45",
+      trend: "+3",
+      iconBg: "bg-indigo-100",
+      iconColor: "text-indigo-600",
+    },
+    {
+      icon: <IoIosTrendingUp />,
+      label: "Active Flights",
+      value: "147",
+      trend: "+12",
+      iconBg: "bg-orange-100",
+      iconColor: "text-orange-600",
+    },
+  ];
+
   return (
-    <div>
-      <div>
-        <div className='flex md:justify-center gap-10 items-center   bg-gray-200 py-4 shadow-md px-5  md:px-25 lg:px-50 w-full'>
-            <PiAirplaneTakeoffLight size={50} className='bg-blue-700 p-2 rounded-full text-white'/>
-            <div className='flex flex-col '>
-                <h1 className='text-2xl font-bold'>SkyHub International Airport</h1>
-                <p className='text-gray-500'>Real-time flight information and booking</p>
-            </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header section */}
+      <header className='flex flex-col md:flex-row md:justify-center gap-6 items-center bg-white py-6 shadow-sm px-6 w-full border-b border-gray-200'>
+        <div className='bg-blue-600 p-3 rounded-2xl shadow-lg shadow-blue-200'>
+          <PiAirplaneTakeoffLight size={32} className='text-white' />
+        </div>
+        <div className='flex flex-col text-center md:text-left'>
+          <h1 className='text-2xl font-extrabold text-gray-900 tracking-tight'>SkyHub International Airport</h1>
+          <p className='text-sm text-gray-500 font-medium uppercase tracking-wider'>Real-time flight information and booking</p>
+        </div>
+      </header>
+
+      {/* Dashboard Content */}
+      <main className='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+          {stats.map((stat, index) => (
+            <StatCard key={index} {...stat} />
+          ))}
         </div>
 
-
-<div className='px-6 md:px-12 lg:px-20 mt-10'>
- 
- <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8'>
-
-  <div className='border border-gray-300 rounded-lg shadow-lg h-40 w-full flex justify-between px-8 items-center'>
-    <div >
-    < PiAirplaneTakeoffLight size={50} className='bg-blue-200 text-blue-500 p-2 rounded-full'/>
-    <p className='mt-3 text-gray-500'>Passengers Today</p>
-    <p className='text-3xl'>23,456</p>
+        {/* Navigation Tabs */}
+        <div className='mt-12 max-w-4xl mx-auto'>
+          <div className='bg-white shadow-xl shadow-gray-200/50 rounded-2xl p-2 border border-gray-100'>
+            <div className='flex flex-wrap md:flex-nowrap justify-between gap-2'>
+              {['Departures', 'Arrivals', 'Book Flight'].map((item) => (
+                <button
+                  key={item}
+                  className='flex-1 py-4 px-6 text-sm font-bold text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all active:scale-95'
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-    <div className='bg-green-100 p-1.5 rounded-full'>
-    <p>+8%</p>
-    </div>
-  </div>
+  );
+};
 
-
-  <div className='border border-gray-300 rounded-lg shadow-lg h-40 w-full flex justify-between px-8 items-center'>
-    <div >
-    <GoPeople size={50} className='bg-green-200 text-green-500 p-2 rounded-full'/>
-    <p className='mt-3 text-gray-500'>On-Time Rate</p>
-    <p className='text-3xl'>94%</p>
-    </div>
-    <div className='bg-green-100 p-1.5 rounded-full'>
-    <p>+2%</p>
-    </div>
-  </div>
-  <div className='border border-gray-300 rounded-lg shadow-lg h-40 w-full flex justify-between px-8 items-center'>
-    <div >
-    <MdOutlineWatchLater size={50} className='bg-indigo-200 text-indigo-500 p-2 rounded-full'/>
-    <p className='mt-3 text-gray-500'>Airlines</p>
-    <p className='text-3xl'>45</p>
-    </div>
-    <div className='bg-green-100 p-1.5 rounded-full'>
-    <p>+3</p>
-    </div>
-  </div>
-
-
-  <div className='border border-gray-300 rounded-lg shadow-lg h-40 w-full flex justify-between px-8 items-center'>
-    <div >
-    <IoIosTrendingUp size={50} className='bg-red-200 text-red-500 p-2 rounded-full'/>
-    <p className='mt-3 text-gray-500'>Active Flights</p>
-    <p className='text-3xl'>147</p>
-    </div>
-    <div className='bg-green-100 p-1.5 rounded-full'>
-    <p>+12</p>
-    </div>
-  </div>
-
-
-
-
-
-
-</div>
-</div>
-
-
-      </div>
-    </div>
-  )
-}
-
-export default Navbar
+export default Navbar;
